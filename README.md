@@ -9,6 +9,7 @@ Built on top of the OAuth 2.0, Open ID Connect, JSON Web Token (JWT) and SAML 2.
 
 - Install a Nuxeo server, version 6.x or higher.
 
+- Keycloak Adapter v.3.4.3
 - Download [keycloak tomcat 8 adpaters](https://www.keycloak.org/archive/downloads-3.4.3.html)
   and unpack everything in your ${NUXEO_CONF}/templates/keycloak/nxserver/plugins directory (see "Sample" directory of this repository)
   
