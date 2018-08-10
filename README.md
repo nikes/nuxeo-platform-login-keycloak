@@ -9,7 +9,7 @@ Built on top of the OAuth 2.0, Open ID Connect, JSON Web Token (JWT) and SAML 2.
 
 - Install a Nuxeo server, version 6.x or higher.
 
-- Download [keycloak tomcat 7 adpaters](http://sourceforge.net/projects/keycloak/files/1.3.1.Final/adapters)
+- Download [keycloak tomcat 8 adpaters](https://www.keycloak.org/archive/downloads-3.4.3.html)
   and unpack everything in your ${NUXEO_CONF}/templates/keycloak/nxserver/plugins directory (see "Sample" directory of this repository)
   
 - Install maven 3+ and build _nuxeo-platform-login-keycloak_ by running:
