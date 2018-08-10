@@ -1,0 +1,8 @@
+org/nuxeo/ecm/platform/ui/web/keycloak/KeycloakUserInfo.class
+org/nuxeo/ecm/platform/ui/web/keycloak/KeycloakRequestAuthenticator$1.class
+org/nuxeo/ecm/platform/ui/web/keycloak/KeycloakRequestAuthenticator.class
+org/nuxeo/ecm/platform/ui/web/keycloak/KeycloakAuthenticatorProvider.class
+org/nuxeo/ecm/platform/ui/web/keycloak/DeploymentResult.class
+org/nuxeo/ecm/platform/ui/web/keycloak/KeycloakUserInfo$KeycloakUserInfoBuilder.class
+org/nuxeo/ecm/platform/ui/web/keycloak/KeycloakAuthenticationPlugin.class
+org/nuxeo/ecm/platform/ui/web/keycloak/KeycloakUserMapper.class
