@@ -118,7 +118,7 @@ public class KeycloakUserMapper implements UserMapper {
             DocumentModel group = findGroup(role);
             if (group != null) {
                 List<String> users = Framework.doPrivileged(() -> userManager.getUsersInGroupAndSubGroups(role));
-                if (!users.contains(role)) {
+                if (!users.contains(username)) {
                     users.add(username);
 
                     group.setProperty(userManager.getGroupSchemaName(), userManager.getGroupMembersField(), users);
