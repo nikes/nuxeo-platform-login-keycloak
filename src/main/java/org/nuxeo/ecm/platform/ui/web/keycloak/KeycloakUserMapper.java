@@ -74,12 +74,17 @@ public class KeycloakUserMapper implements UserMapper {
             userModel = createPrincipal(userAttributes);
         }
 
-        attachGroups(userObject);
-
+        NuxeoPrincipal userPrincipal = null;
         if (userModel != null) {
-            return userManager.getPrincipal(username);
+            userPrincipal = Framework.doPrivileged(() -> userManager.getPrincipal(username));
         }
-        return null;
+        if (userPrincipal == null) {
+            return null;
+        }
+
+        groupsManager(userObject, userPrincipal);
+
+        return userPrincipal;
     }
 
     @Override
@@ -107,14 +112,27 @@ public class KeycloakUserMapper implements UserMapper {
         Framework.doPrivileged(() -> userManager.updateUser(userModel));
     }
 
-    /**
-     * Attach user to groups
-     */
-    private void attachGroups(Object userObject) {
+    private void groupsManager(Object userObject, NuxeoPrincipal userPrincipal) {
         KeycloakUserInfo userInfo = (KeycloakUserInfo) userObject;
         String username = userInfo.getUserName();
+        Set<String> roles = userInfo.getRoles();
 
-        for (String role : userInfo.getRoles()) {
+        for (String groupName : userPrincipal.getAllGroups()) {
+            if (!roles.contains(groupName)) {
+                DocumentModel group = findGroup(groupName);
+                if (group != null) {
+                    List<String> users = Framework.doPrivileged(() -> userManager.getUsersInGroupAndSubGroups(groupName));
+                    if (users.contains(username)) {
+                        users.remove(username);
+
+                        group.setProperty(userManager.getGroupSchemaName(), userManager.getGroupMembersField(), users);
+                        Framework.doPrivileged(() -> userManager.updateGroup(group));
+                    }
+                }
+            }
+        }
+
+        for (String role : roles) {
             DocumentModel group = findGroup(role);
             if (group != null) {
                 List<String> users = Framework.doPrivileged(() -> userManager.getUsersInGroupAndSubGroups(role));
